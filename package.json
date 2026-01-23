@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
+    "cf:build": "npm run build-only",
+    "cf:dev": "npm run cf:build && wrangler pages dev ./dist --compatibility-date=2026-01-23 --port=8788",
     "test:unit": "vitest",
     "build-only": "vite build",
     "type-check": "vue-tsc --build"
@@ -34,6 +36,7 @@
     "vite-plugin-image-optimizer": "^1.1.8",
     "vite-plugin-vue-devtools": "^7.7.2",
     "vitest": "^3.0.5",
+    "wrangler": "^3.107.0",
     "vue-tsc": "^2.2.2"
   }
 }

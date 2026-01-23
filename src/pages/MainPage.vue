@@ -20,8 +20,8 @@ import FooterSection from "@/components/sections/FooterSection.vue";
     <listen-section />
     <about-section />
     <live-shows-section />
-    <booking-form-section />
     <collaborations-section />
+    <booking-form-section />
     <platforms-section />
   </main>
   <footer-section />

@@ -1,0 +1,12 @@
+.booking.dark,
+.booking.dark * {
+  /* Dark grey accents (button + focus ring + borders) */
+  --vf-primary: #3a3a3a;
+  --vf-primary-darker: #2f2f2f;
+
+  --vf-ring-color: rgba(140, 140, 140, 0.35);
+  --vf-border-color-input: #3a3a3a;
+  --vf-border-color-input-focus: #3a3a3a;
+  --vf-border-color-btn: #3a3a3a;
+}
+

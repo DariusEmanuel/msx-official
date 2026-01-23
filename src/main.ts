@@ -1,6 +1,7 @@
 import "./assets/main.css";
 import "@vueform/vueform/dist/vueform.css";
 import "@vueform/vueform/themes/vueform/css/index.css";
+import "./assets/vueform-overrides.css";
 
 import { createApp } from "vue";
 import { createPinia } from "pinia";

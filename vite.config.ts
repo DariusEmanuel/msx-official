@@ -28,6 +28,16 @@ export default defineConfig({
       },
     }),
   ],
+  server: {
+    // In dev, proxy API requests to the local Cloudflare Pages Functions dev server (wrangler)
+    // so you can keep using Vite on :5173.
+    proxy: {
+      "/api": {
+        target: "http://localhost:8788",
+        changeOrigin: true,
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),

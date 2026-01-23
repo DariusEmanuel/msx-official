@@ -3,10 +3,41 @@ import { ref } from "vue";
 import HeadlineForSection from "@/components/base/HeadlineForSection.vue";
 
 const submitted = ref(false);
+const submitting = ref(false);
+const submitError = ref<string | null>(null);
 
-function onSubmit() {
-  // TODO: wire this to a real endpoint (email / CRM / serverless) before launch
-  submitted.value = true;
+async function onSubmit(form$: any) {
+  submitted.value = false;
+  submitError.value = null;
+  submitting.value = true;
+
+  try {
+    const data = form$?.data ? form$.data : {};
+
+    const res = await fetch("/api/send-inquiry", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        name: data.name,
+        event_date: data.event_date,
+        event_type: data.event_type,
+        message: data.message,
+      }),
+    });
+
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      throw new Error(text || "Request failed");
+    }
+
+    submitted.value = true;
+    form$?.reset?.();
+  } catch (e: any) {
+    submitError.value =
+      "Your request cannot be processed right now. Please email events@mateisax.com";
+  } finally {
+    submitting.value = false;
+  }
 }
 </script>
 
@@ -46,7 +77,7 @@ function onSubmit() {
           placeholder="Type of event"
           field-name="Type of event"
           :rules="['required', 'max:255']"
-          description="Examples: Wedding, Corporate event, Private party, Club night, Festival."
+          description="Examples: Festival, Beach Club, Wedding, Corporate event, Private party, Night Club ..."
         />
 
         <TextareaElement
@@ -62,6 +93,7 @@ function onSubmit() {
           button-label="Send inquiry"
           :full="true"
           size="lg"
+          :disabled="submitting"
         />
 
         <StaticElement
@@ -69,6 +101,13 @@ function onSubmit() {
           name="success"
           tag="p"
           content="Thanks! Your inquiry was sent. We’ll get back to you shortly."
+        />
+
+        <StaticElement
+          v-if="submitError"
+          name="error"
+          tag="p"
+          :content="submitError"
         />
       </Vueform>
     </div>
@@ -78,10 +117,6 @@ function onSubmit() {
 <style scoped lang="scss">
 .booking {
   margin: 40px 20px;
-
-  /* Optional: tune Vueform theme variables to match the site */
-  --vf-primary: #fd6b21;
-  --vf-ring-color: rgba(253, 107, 33, 0.35);
 }
 
 .booking__form {
