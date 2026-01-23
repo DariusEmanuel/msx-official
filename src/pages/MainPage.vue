@@ -7,6 +7,7 @@ import BioSection from "@/components/sections/BioSection.vue";
 import ListenSection from "@/components/sections/ListenSection.vue";
 import AboutSection from "@/components/sections/AboutSection.vue";
 import LiveShowsSection from "@/components/sections/LiveShowsSection.vue";
+import BookingFormSection from "@/components/sections/BookingFormSection.vue";
 import CollaborationsSection from "@/components/sections/CollaborationsSection.vue";
 import PlatformsSection from "@/components/sections/PlatformsSection.vue";
 import FooterSection from "@/components/sections/FooterSection.vue";
@@ -19,6 +20,7 @@ import FooterSection from "@/components/sections/FooterSection.vue";
     <listen-section />
     <about-section />
     <live-shows-section />
+    <booking-form-section />
     <collaborations-section />
     <platforms-section />
   </main>
