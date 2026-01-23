@@ -7,32 +7,40 @@ const referencesStore = useReferencesStore();
 <template>
   <footer class="footer">
     <div class="footer__references">
-      <h6 class="footer__title">Valuable References</h6>
-      <div class="footer__wrapper">
-        <div
-          v-for="(category, key) in referencesStore.footerReferences"
-          :key="key"
-          class="footer__category"
-        >
-          <h6 class="footer__category-title">{{ category.title }}</h6>
-          <ul class="footer__list">
-            <li
-              v-for="(item, index) in category.links"
-              :key="index"
-              class="footer__list-item"
+      <details class="footer__accordion">
+        <summary class="footer__accordion-summary">
+          <h6 class="footer__title">Valuable References</h6>
+          <span class="footer__accordion-icon" aria-hidden="true"></span>
+        </summary>
+
+        <div class="footer__accordion-content">
+          <div class="footer__wrapper">
+            <div
+              v-for="(category, key) in referencesStore.footerReferences"
+              :key="key"
+              class="footer__category"
             >
-              <a
-                :href="item.url"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="footer__link"
-              >
-                {{ item.text }}
-              </a>
-            </li>
-          </ul>
+              <h6 class="footer__category-title">{{ category.title }}</h6>
+              <ul class="footer__list">
+                <li
+                  v-for="(item, index) in category.links"
+                  :key="index"
+                  class="footer__list-item"
+                >
+                  <a
+                    :href="item.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="footer__link"
+                  >
+                    {{ item.text }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
+      </details>
     </div>
     <div class="footer__reserved">
       <img
@@ -48,9 +56,7 @@ const referencesStore = useReferencesStore();
 
 <style lang="scss">
 .footer {
-  max-width: 900px;
   width: 100%;
-  padding-top: 40px;
   background-color: rgb(24, 24, 24, 0.5);
   color: rgba(255, 255, 255, 0.8);
   display: flex;
@@ -60,21 +66,65 @@ const referencesStore = useReferencesStore();
 
   &__title {
     text-transform: uppercase;
-    margin-bottom: 20px;
-    font-size: 20px;
+    font-size: 14px;
     text-align: left;
     font-family: GalvjiBold;
   }
 
   &__references {
-    align-self: flex-start;
-    margin-left: 20px;
+    width: 100%;
+    align-self: stretch;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  &__accordion {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    background: rgba(24, 24, 24, 0.35);
+    overflow: hidden;
+  }
+
+  &__accordion-summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 14px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &__accordion-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  &__accordion-icon {
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid rgba(255, 255, 255, 0.65);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.65);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+    flex: 0 0 auto;
+  }
+
+  &__accordion[open] &__accordion-icon {
+    transform: rotate(-135deg);
+  }
+
+  &__accordion-content {
+    padding: 0 14px 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    padding-top: 14px;
   }
 
   &__category {
@@ -103,6 +153,12 @@ const referencesStore = useReferencesStore();
   &__link {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.8);
+    transition: color 0.2s ease;
+  }
+
+  &__link:hover,
+  &__link:focus-visible {
+    color: rgba(255, 255, 255, 0.95);
   }
 
   &__reserved {

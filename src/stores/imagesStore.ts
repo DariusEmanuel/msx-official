@@ -32,11 +32,51 @@ export const useImagesStore = defineStore("images", () => {
     },
   ]);
 
+  // const imagesUnderBio = ref<Image[]>(
+  //   Array.from({ length: 10 }, (_, i) => ({
+  //     url: new URL(`/src/assets/underBio/image${i + 1}.jpg`, import.meta.url)
+  //       .href,
+  //     alt: "Image Carousel",
+  //   }))
+  // );
+
   const imagesUnderBio = ref<Image[]>(
-    Array.from({ length: 10 }, (_, i) => ({
-      url: new URL(`/src/assets/underBio/image${i + 1}.jpg`, import.meta.url)
-        .href,
-      alt: "Image Carousel",
+    [
+      "Untold2025_810_22626_MBA01119_MB.jpg",
+      "B9FEBD24-24C0-401B-A1A9-AE0F1A6D4AFC.jpeg",
+      "Untold2025_0810_020200_9292_AAX.jpg",
+      "5cb39336-8ccd-4509-a0c8-705993c399cf.JPG",
+      "C2FD439E-6821-41F1-A418-DE91973A96C5.jpeg",
+      "image10.jpg",
+      "NKT08797.jpg",
+      "DEE0FEEF-CA9D-4FA5-85E7-1AF4A2D72B5B.jpeg",
+      "NKT08386.JPG",
+      "image7.jpg",
+      "image8.jpg",
+      "image9.jpg",
+    ].map((filename) => ({
+      url: new URL(`/src/assets/underBio/${filename}`, import.meta.url).href,
+      alt: "Matei Sax performance photo",
+    }))
+  );
+
+  const imagesUnderLiveShows = ref<Image[]>(
+    [
+      "12e7ab11-9349-48fc-9961-3c4a2958bccc.JPG",
+      "b7240ef4-a2f5-41c0-9cf0-284e73f5260b.JPG",
+      "5b2e182c-4e30-450a-bc95-416752d533fc.JPG",
+      "6ba66f81-a082-4a65-8a88-b393c5267aed.JPG",
+      "766613d5-15bc-408d-af72-7c8930c4cfa2.JPG",
+      "8942845c-d140-4de5-b257-7c281ced6a8c.JPG",
+      "9ae67d47-c980-4a22-a4d8-ac4a68b5dd18.JPG",
+      "a02693cb-7c13-4f78-89d7-66821b9e10bd.JPG",
+      "f5cae22b-6632-456c-a163-6ea6848904fb.JPG",
+      "SXV_9283.jpg",
+      "SXV_9313.jpg",
+      "2148f114-fd73-4d21-87ca-c28a17bef4e2.JPG",
+    ].map((filename) => ({
+      url: new URL(`/src/assets/liveShows/${filename}`, import.meta.url).href,
+      alt: "Matei Sax live show photo",
     }))
   );
 
@@ -96,5 +136,6 @@ export const useImagesStore = defineStore("images", () => {
     socialLinks,
     imagesUnderBio,
     collaborations,
+    imagesUnderLiveShows
   };
 });

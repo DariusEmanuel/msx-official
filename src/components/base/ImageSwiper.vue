@@ -22,7 +22,7 @@ const onSlideChange = (e: any) => {};
     :pagination="{ hideOnClick: true }"
     :breakpoints="{ 768: { slidesPerView: 3 } }"
     autoplay-delay="2500"
-    autoplay-disable-on-interaction="false"
+    autoplay-disable-on-interaction="true"
     @swiperprogress="onProgress"
     @swiperslidechange="onSlideChange"
   >
@@ -48,7 +48,7 @@ swiper-container::part(bullet) {
 
 swiper-slide {
   width: 100%;
-  height: 220px;
+  // height: 220px;
   text-align: center;
   font-size: 20px;
   display: flex;

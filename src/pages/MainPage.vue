@@ -30,6 +30,6 @@ import FooterSection from "@/components/sections/FooterSection.vue";
 <style>
 main {
   /* this is temporar */
-  margin-bottom: 200px;
+  /* margin-bottom: 200px; */
 }
 </style>

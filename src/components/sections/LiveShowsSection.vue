@@ -11,7 +11,7 @@ const imagesStore = useImagesStore();
     <headline-for-section class="about-section__headline" title="Live Shows">
       See Matei in action.</headline-for-section
     >
-    <image-swiper :images="imagesStore.imagesUnderBio" />
+    <image-swiper :images="imagesStore.imagesUnderLiveShows" />
   </div>
 </template>
 

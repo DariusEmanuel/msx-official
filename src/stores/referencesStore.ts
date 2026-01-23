@@ -35,6 +35,10 @@ export const useReferencesStore = defineStore("references", () => {
       title: "News Citations",
       links: [
         {
+          text: "Un Vampiro Tenerife Sur",
+          url: "https://www.soldelsurtenerife.com/articulo/cultura1/vampiro-sur-tenerife/20240202144246079927.html"
+        },
+        {
           text: "Prima TV Sport",
           url: "https://www.youtube.com/watch?v=HyPlaJo5kCw",
         },
@@ -79,14 +83,6 @@ export const useReferencesStore = defineStore("references", () => {
         {
           text: "CHIOS Cluj",
           url: "https://www.chios.ro/event/chios-socializing-friday-matei-sax-samitone-boddo/",
-        },
-        {
-          text: "Insomnia Café & Bistro",
-          url: "https://cluj.media/evenimente/matei-sax-si-samitone/",
-        },
-        {
-          text: "Club Kalabria",
-          url: "https://allevents.in/cluj-napoca/dj-krisstal-and-matei-sax-at-club-kalabria/200024325684201",
         },
         {
           text: "The Trumpets",
