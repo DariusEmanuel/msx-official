@@ -20,6 +20,7 @@ async function onSubmit(form$: any) {
       body: JSON.stringify({
         name: data.name,
         event_date: data.event_date,
+        location: data.location,
         event_type: data.event_type,
         message: data.message,
       }),
@@ -46,7 +47,7 @@ async function onSubmit(form$: any) {
     <HeadlineForSection
       title="Booking"
       before-text="Matei Sax"
-      font-size="82px"
+      font-size="68px"
       line-height="96px"
       font-size-span="16px"
       line-height-span="20px"
@@ -70,6 +71,13 @@ async function onSubmit(form$: any) {
           field-name="Event date"
           :rules="['required']"
           display-format="MMMM Do, YYYY"
+        />
+
+        <TextElement
+          name="location"
+          placeholder="Country, City, Location"
+          field-name="Country, City, Location"
+          :rules="['required', 'max:255']"
         />
 
         <TextElement

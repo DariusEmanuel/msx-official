@@ -5,6 +5,7 @@ type Env = {
 type SendInquiryBody = {
     name: string;
     event_date: string;
+    location: string;
     event_type: string;
     message?: string;
 };
@@ -44,10 +45,11 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     const name = (body.name || "").trim();
     const eventDate = (body.event_date || "").trim();
+    const location = (body.location || "").trim();
     const eventType = (body.event_type || "").trim();
     const message = (body.message || "").trim();
 
-    if (!name || !eventDate || !eventType) {
+    if (!name || !eventDate || !location || !eventType) {
         return json({ ok: false, error: "Missing required fields" }, 400);
     }
 
@@ -58,6 +60,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         `<p><b>NEW CLIENT — mateisax.com</b></p>`,
         `<p><b>Name:</b> ${escapeHtml(name)}</p>`,
         `<p><b>Event date:</b> ${escapeHtml(eventDate)}</p>`,
+        `<p><b>Location:</b> ${escapeHtml(location)}</p>`,
         `<p><b>Type of event:</b> ${escapeHtml(eventType)}</p>`,
         message
             ? `<p><b>Message:</b><br/>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>`
