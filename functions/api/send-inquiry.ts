@@ -22,8 +22,17 @@ function json(data: unknown, status = 200) {
 export const onRequestPost: PagesFunction<Env> = async (context) => {
     const apiKey = context.env.BREVO_API_KEY;
     if (!apiKey) {
-        console.error("Missing BREVO_API_KEY. Did you create a `.dev.vars` file for wrangler pages dev?");
-        return json({ ok: false, error: "Missing BREVO_API_KEY" }, 500);
+        console.error(
+            "Missing BREVO_API_KEY. Set it in Cloudflare Pages -> Settings -> Environment variables (Production), or in .dev.vars for local dev."
+        );
+        return json(
+            {
+                ok: false,
+                error: "Missing BREVO_API_KEY",
+                hint: "Set BREVO_API_KEY in Cloudflare Pages environment variables (Production) and redeploy.",
+            },
+            500
+        );
     }
 
     let body: SendInquiryBody;
@@ -65,19 +74,28 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         htmlContent,
     };
 
-    const brevoRes = await fetch("https://api.brevo.com/v3/smtp/email", {
-        method: "POST",
-        headers: {
-            "content-type": "application/json",
-            accept: "application/json",
-            "api-key": apiKey,
-        },
-        body: JSON.stringify(payload),
-    });
+    let brevoRes: Response;
+    try {
+        brevoRes = await fetch("https://api.brevo.com/v3/smtp/email", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                accept: "application/json",
+                "api-key": apiKey,
+            },
+            body: JSON.stringify(payload),
+        });
+    } catch (e) {
+        console.error("Brevo fetch failed", e);
+        return json({ ok: false, error: "Network error calling Brevo" }, 502);
+    }
 
     if (!brevoRes.ok) {
         const details = await brevoRes.text().catch(() => "");
-        return json({ ok: false, error: "Brevo request failed", details }, 502);
+        return json(
+            { ok: false, error: "Brevo request failed", status: brevoRes.status, details },
+            502
+        );
     }
 
     return json({ ok: true }, 200);
