@@ -12,11 +12,9 @@ import HeadlineForSection from "@/components/base/HeadlineForSection.vue";
       line-height="96px"
     />
     <div class="about-section__text-content">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam nihil
-      vitae, deleniti quas debitis maxime sed mollitia voluptatibus unde ratione
-      doloremque autem animi explicabo iusto molestiae at! Qui praesentium
-      itaque distinctio dolorem sit ex ipsam ut quisquam minus eveniet dolore
-      eum, explicabo fugit nisi provident iure culpa velit laudantium animi?
+      He is an international saxophone player and live performer with over a decade of experience on global stages. Originating from Transylvania, Matei has performed across Europe and Africa, from large-scale festivals such as UNTOLD and Electric Castle to destination events and luxury weddings in locations including Spain, Cabo Verde, Greece and Romania.
+    <br />
+      His sound combines global musical influences with modern house music, delivering dynamic party performances, while also offering refined, jazzy saxophone sets tailored for lounge and sophisticated event environments. Known for adaptability and strong stage presence, Matei Sax is a versatile act suitable for festivals, club events, and premium private functions.
     </div>
   </div>
 </template>

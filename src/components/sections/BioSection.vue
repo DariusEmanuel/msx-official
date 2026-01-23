@@ -15,10 +15,7 @@ const imagesStore = useImagesStore();
       </h6>
 
       <p class="bio__description">
-        You’re in the right place. Matei, with over 8 years of experience and
-        concerts all over Europe makes sure to bring the party and good vibes,
-        and can provide music for all kinds of events from weddings, parties,
-        club nights to festivals and many more.
+      You’re in the right place. Matei is a musician with over 10 years of experience who has performed around the world, from his hometown in Transylvania to the beaches of Tenerife, at major festivals such as UNTOLD and Electric Castle, as well as international weddings and everything in between.
         <br /><br />
         Available worldwide.
       </p>
