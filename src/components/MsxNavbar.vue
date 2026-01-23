@@ -14,8 +14,14 @@
           :key="index"
           class="header__social-item"
         >
-          <a :href="link" target="_blank" class="header__social-link">
-            <img :src="url" :alt class="header__social-icon" />
+          <a
+            :href="link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="header__social-link"
+            :aria-label="alt"
+          >
+            <img :src="url" :alt="alt" class="header__social-icon" />
           </a>
         </li>
       </ul>

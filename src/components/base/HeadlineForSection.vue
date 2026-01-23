@@ -1,32 +1,27 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from "vue";
 
-const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  beforeText: {
-    type: String,
-    default: "",
-  },
-  fontSize: {
-    type: String,
-    default: "60px",
-  },
-  lineHeight: {
-    type: String,
-    default: "55px",
-  },
-  fontSizeSpan: {
-    type: String,
-    default: "16px",
-  },
-  lineHeightSpan: {
-    type: String,
-    default: "20px",
-  },
-});
+type HeadingTag = "h1" | "h2" | "h3";
+
+const props = withDefaults(
+  defineProps<{
+    title: string;
+    beforeText?: string;
+    fontSize?: string;
+    lineHeight?: string;
+    fontSizeSpan?: string;
+    lineHeightSpan?: string;
+    as?: HeadingTag;
+  }>(),
+  {
+    beforeText: "",
+    fontSize: "60px",
+    lineHeight: "55px",
+    fontSizeSpan: "16px",
+    lineHeightSpan: "20px",
+    as: "h2",
+  }
+);
 
 const cssProps = computed(() => ({
   "--before-content": `'${props.beforeText}'`,
@@ -42,7 +37,9 @@ const cssSpanProps = computed(() => ({
 
 <template>
   <section class="text-block">
-    <h1 class="text-block__title" :style="cssProps">{{ title }}</h1>
+    <component :is="props.as" class="text-block__title" :style="cssProps">
+      {{ title }}
+    </component>
     <p class="text-block__subtitle" :style="cssSpanProps">
       <slot></slot>
     </p>

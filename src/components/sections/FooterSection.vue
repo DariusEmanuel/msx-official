@@ -21,7 +21,12 @@ const referencesStore = useReferencesStore();
               :key="index"
               class="footer__list-item"
             >
-              <a :href="item.url" target="_blank" class="footer__link">
+              <a
+                :href="item.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer__link"
+              >
                 {{ item.text }}
               </a>
             </li>
