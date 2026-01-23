@@ -3,6 +3,7 @@ import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
+import vueform from "@vueform/vueform/vite";
 
 export default defineConfig({
   plugins: [
@@ -13,6 +14,8 @@ export default defineConfig({
         },
       },
     }),
+    // Ensures Vueform deps (eg. wnumb) are optimized correctly in Vite dev server
+    vueform(),
     ViteImageOptimizer({
       jpg: {
         quality: 80,
