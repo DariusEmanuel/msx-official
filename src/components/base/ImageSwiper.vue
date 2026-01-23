@@ -23,6 +23,7 @@ const onSlideChange = (e: any) => {};
     :breakpoints="{ 768: { slidesPerView: 3 } }"
     autoplay-delay="2500"
     autoplay-disable-on-interaction="true"
+    touch-start-prevent-default="false"
     @swiperprogress="onProgress"
     @swiperslidechange="onSlideChange"
   >
@@ -36,6 +37,8 @@ const onSlideChange = (e: any) => {};
 swiper-container {
   width: 100%;
   height: 100%;
+  /* Let vertical scroll win on mobile when the gesture starts on the carousel */
+  touch-action: pan-y;
 }
 
 swiper-container::part(bullet-active) {

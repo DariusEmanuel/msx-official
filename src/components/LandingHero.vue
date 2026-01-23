@@ -73,6 +73,8 @@ $primary-color: #fd6b21; // Orange
   height: 100svh;
   min-height: 100vh;
   overflow: hidden;
+  /* Ensure vertical scroll gestures are not blocked/captured on mobile */
+  touch-action: pan-y;
 
   &__background {
     position: absolute;
@@ -87,6 +89,8 @@ $primary-color: #fd6b21; // Orange
     will-change: transform;
     transform: translate3d(0, 0, 0); /* GPU acceleration */
     z-index: -1;
+    /* Don't let the full-screen background intercept touch gestures */
+    pointer-events: none;
   }
 
   &__content {
@@ -100,6 +104,7 @@ $primary-color: #fd6b21; // Orange
     align-items: center;
     justify-content: center;
     z-index: 1;
+    touch-action: pan-y;
   }
 
   &__logo {
