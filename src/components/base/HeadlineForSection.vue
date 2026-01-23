@@ -58,10 +58,11 @@ const cssSpanProps = computed(() => ({
   position: relative;
   text-transform: uppercase;
   font: normal normal bold var(--font-size) / var(--line-height) GalvjiBold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  /* Avoid horizontal overflow on mobile (flex titles + large font-size can force sideways scroll) */
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 
   &::before {
     content: var(--before-content);

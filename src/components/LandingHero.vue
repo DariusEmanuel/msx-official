@@ -69,7 +69,9 @@ $primary-color: #fd6b21; // Orange
 .parallax {
   position: relative;
   width: 100%;
-  height: 100vh;
+  /* iOS address-bar + 100vh causes jumpy/strange scrolling; svh behaves better on mobile */
+  height: 100svh;
+  min-height: 100vh;
   overflow: hidden;
 
   &__background {
@@ -77,7 +79,7 @@ $primary-color: #fd6b21; // Orange
     top: 0;
     left: 0;
     width: 100%;
-    height: 110vh;
+    height: 110svh;
     background-image: url("../assets/hero/ATS_6029.JPG");
     background-size: cover;
     background-position: center;
@@ -92,7 +94,7 @@ $primary-color: #fd6b21; // Orange
     text-align: center;
     color: var(--color);
     width: 100%;
-    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     align-items: center;

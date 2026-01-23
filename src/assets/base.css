@@ -75,6 +75,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Prevent accidental horizontal overflow (common cause of "weird" mobile scrolling) */
+html,
+body {
+  overflow-x: hidden;
+}
+
 @font-face {
   font-family: Galvji;
   src: url("./fonts/galvji.ttf") format("truetype");
