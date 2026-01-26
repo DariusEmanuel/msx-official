@@ -19,6 +19,8 @@ async function onSubmit(form$: any) {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
         name: data.name,
+        email: data.email,
+        phone: data.phone,
         event_date: data.event_date,
         location: data.location,
         event_type: data.event_type,
@@ -63,6 +65,23 @@ async function onSubmit(form$: any) {
           placeholder="Name"
           field-name="Name"
           :rules="['required', 'max:255']"
+        />
+
+        <TextElement
+          name="email"
+          input-type="email"
+          placeholder="Email"
+          field-name="Email"
+          :rules="['required', 'email', 'max:255']"
+        />
+
+        <PhoneElement
+          name="phone"
+          placeholder="Phone number"
+          field-name="Phone number"
+          :rules="['required']"
+          :allow-incomplete="true"
+          :unmask="true"
         />
 
         <DateElement

@@ -4,6 +4,8 @@ type Env = {
 
 type SendInquiryBody = {
     name: string;
+    email: string;
+    phone: string;
     event_date: string;
     location: string;
     event_type: string;
@@ -44,21 +46,24 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     }
 
     const name = (body.name || "").trim();
+    const email = (body.email || "").trim();
+    const phone = (body.phone || "").trim();
     const eventDate = (body.event_date || "").trim();
     const location = (body.location || "").trim();
     const eventType = (body.event_type || "").trim();
     const message = (body.message || "").trim();
 
-    if (!name || !eventDate || !location || !eventType) {
+    if (!name || !email || !phone || !eventDate || !location || !eventType) {
         return json({ ok: false, error: "Missing required fields" }, 400);
     }
 
-    // TODO: confirm recipient email
     const toEmail = "events@mateisax.com";
 
     const htmlContent = [
         `<p><b>NEW CLIENT — mateisax.com</b></p>`,
         `<p><b>Name:</b> ${escapeHtml(name)}</p>`,
+        `<p><b>Email:</b> ${escapeHtml(email)}</p>`,
+        `<p><b>Phone:</b> ${escapeHtml(phone)}</p>`,
         `<p><b>Event date:</b> ${escapeHtml(eventDate)}</p>`,
         `<p><b>Location:</b> ${escapeHtml(location)}</p>`,
         `<p><b>Type of event:</b> ${escapeHtml(eventType)}</p>`,
@@ -72,6 +77,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         sender: {
             name: "Matei Sax Website",
             email: "client@mateisax.com",
+        },
+        replyTo: {
+            name,
+            email,
         },
         to: [{ email: toEmail, name: "MSX" }],
         htmlContent,
