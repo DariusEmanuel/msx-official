@@ -2,6 +2,16 @@ type Env = {
     BREVO_API_KEY: string;
 };
 
+// Minimal local typing (Cloudflare provides PagesFunction type at runtime/build).
+type PagesFunction<EnvBindings = unknown> = (context: {
+    env: EnvBindings;
+    request: Request;
+}) => Response | Promise<Response>;
+
+import {
+    renderBookingInquiryEmail,
+} from "./templates/bookingInquiryEmail";
+
 type SendInquiryBody = {
     name: string;
     email: string;
@@ -58,22 +68,18 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     }
 
     const toEmail = "events@mateisax.com";
-
-    const htmlContent = [
-        `<p><b>NEW CLIENT — mateisax.com</b></p>`,
-        `<p><b>Name:</b> ${escapeHtml(name)}</p>`,
-        `<p><b>Email:</b> ${escapeHtml(email)}</p>`,
-        `<p><b>Phone:</b> ${escapeHtml(phone)}</p>`,
-        `<p><b>Event date:</b> ${escapeHtml(eventDate)}</p>`,
-        `<p><b>Location:</b> ${escapeHtml(location)}</p>`,
-        `<p><b>Type of event:</b> ${escapeHtml(eventType)}</p>`,
-        message
-            ? `<p><b>Message:</b><br/>${escapeHtml(message).replace(/\n/g, "<br/>")}</p>`
-            : "",
-    ].join("\n");
+    const { subject, html } = renderBookingInquiryEmail({
+        name,
+        email,
+        phone,
+        eventDate,
+        location,
+        eventType,
+        message,
+    });
 
     const payload = {
-        subject: "Booking inquiry — mateisax.com",
+        subject,
         sender: {
             name: "Matei Sax Website",
             email: "client@mateisax.com",
@@ -83,7 +89,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             email,
         },
         to: [{ email: toEmail, name: "MSX" }],
-        htmlContent,
+        htmlContent: html,
     };
 
     let brevoRes: Response;
@@ -112,13 +118,3 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
     return json({ ok: true }, 200);
 };
-
-function escapeHtml(input: string) {
-    return input
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
-
