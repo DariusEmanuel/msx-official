@@ -22,6 +22,7 @@ const onSlideChange = (e: any) => {};
     :pagination="{ hideOnClick: true }"
     :breakpoints="{ 768: { slidesPerView: 3 } }"
     autoplay-delay="2500"
+    rewind="true"
     autoplay-disable-on-interaction="true"
     touch-start-prevent-default="false"
     @swiperprogress="onProgress"
