@@ -4,20 +4,17 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
 
 const imagesStore = useImagesStore();
 
-// Duplicate items so the marquee can wrap seamlessly.
-const items = computed(() => [
-  ...imagesStore.collaborations,
-  ...imagesStore.collaborations,
-]);
+const items = computed(() => imagesStore.collaborations);
 
 const marqueeRef = ref<HTMLDivElement | null>(null);
 const trackRef = ref<HTMLDivElement | null>(null);
+const groupRef = ref<HTMLDivElement | null>(null);
 const isDragging = ref(false);
 
 let rafId: number | null = null;
 let lastTs = 0;
 let offsetPx = 0; // how far we've translated (to the left)
-let contentWidth = 0; // width of one "set" of items (half of duplicated track)
+let contentWidth = 0; // width of one full set of items
 
 let dragStartX = 0;
 let dragStartOffset = 0;
@@ -31,11 +28,10 @@ let isTabVisible = true;
 let io: IntersectionObserver | null = null;
 
 function measure() {
-  const el = trackRef.value;
+  const el = groupRef.value;
   if (!el) return;
-  const w = el.scrollWidth;
-  // We render two identical sets; one set is half the scrollWidth.
-  contentWidth = Math.max(1, w / 2);
+  // Measure a single set's width (includes the padding-right "gap" to the next set).
+  contentWidth = Math.max(1, el.scrollWidth);
   offsetPx = ((offsetPx % contentWidth) + contentWidth) % contentWidth;
 }
 
@@ -168,14 +164,33 @@ onUnmounted(() => {
         @pointerup="onPointerUp"
         @pointercancel="onPointerUp"
       >
-        <div ref="trackRef" class="collaborations__track" :class="{ 'is-dragging': isDragging }">
-          <div
-            v-for="({ url, alt, text }, index) in items"
-            :key="index"
-            class="collaborations__item"
-          >
-            <img :src="url" :alt="alt" loading="lazy" @load="measure" />
-            <p>{{ text }}</p>
+        <div
+          ref="trackRef"
+          class="collaborations__track"
+          :class="{ 'is-dragging': isDragging }"
+        >
+          <!-- First set (measured) -->
+          <div ref="groupRef" class="collaborations__group collaborations__group--first">
+            <div
+              v-for="({ url, alt, text }, index) in items"
+              :key="`a-${index}`"
+              class="collaborations__item"
+            >
+              <img :src="url" :alt="alt" loading="lazy" @load="measure" />
+              <p>{{ text }}</p>
+            </div>
+          </div>
+
+          <!-- Second set (duplicate for seamless wrap) -->
+          <div class="collaborations__group" aria-hidden="true">
+            <div
+              v-for="({ url, alt, text }, index) in items"
+              :key="`b-${index}`"
+              class="collaborations__item"
+            >
+              <img :src="url" :alt="alt" loading="lazy" />
+              <p>{{ text }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -232,9 +247,20 @@ onUnmounted(() => {
   &__track {
     display: flex;
     align-items: center;
-    gap: 40px;
     will-change: transform;
     transform: translate3d(0, 0, 0);
+  }
+
+  &__group {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex: 0 0 auto;
+  }
+
+  /* This padding becomes the "gap" between the duplicated sets and is included in the measured width */
+  &__group--first {
+    padding-right: 40px;
   }
 
   &__track.is-dragging {
