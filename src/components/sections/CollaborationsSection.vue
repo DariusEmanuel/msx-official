@@ -10,6 +10,7 @@ const items = computed(() => [
   ...imagesStore.collaborations,
 ]);
 
+const marqueeRef = ref<HTMLDivElement | null>(null);
 const trackRef = ref<HTMLDivElement | null>(null);
 const isDragging = ref(false);
 
@@ -24,6 +25,10 @@ let dragStartOffset = 0;
 const prefersReducedMotion =
   typeof window !== "undefined" &&
   window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
+let isInView = true;
+let isTabVisible = true;
+let io: IntersectionObserver | null = null;
 
 function measure() {
   const el = trackRef.value;
@@ -52,6 +57,26 @@ function step(ts: number) {
   }
 
   rafId = requestAnimationFrame(step);
+}
+
+function start() {
+  if (prefersReducedMotion) return;
+  if (rafId) return;
+  lastTs = 0;
+  rafId = requestAnimationFrame(step);
+}
+
+function stop() {
+  if (!rafId) return;
+  cancelAnimationFrame(rafId);
+  rafId = null;
+  lastTs = 0;
+}
+
+function updateRunningState() {
+  if (prefersReducedMotion) return;
+  if (isInView && isTabVisible) start();
+  else stop();
 }
 
 function onPointerDown(e: PointerEvent) {
@@ -88,18 +113,45 @@ function onResize() {
   measure();
 }
 
+function onVisibilityChange() {
+  isTabVisible = document.visibilityState === "visible";
+  updateRunningState();
+}
+
 onMounted(() => {
   // Wait a tick for images/fonts layout to settle.
   setTimeout(() => {
     measure();
-    if (!prefersReducedMotion) rafId = requestAnimationFrame(step);
+    updateRunningState();
   }, 0);
   window.addEventListener("resize", onResize, { passive: true });
+
+  document.addEventListener("visibilitychange", onVisibilityChange);
+
+  if ("IntersectionObserver" in window) {
+    io = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        isInView = !!entry?.isIntersecting;
+        updateRunningState();
+      },
+      // Start/stop a bit before it enters/leaves viewport.
+      { root: null, threshold: 0, rootMargin: "200px 0px" }
+    );
+    if (marqueeRef.value) io.observe(marqueeRef.value);
+  }
 });
 
 onUnmounted(() => {
-  if (rafId) cancelAnimationFrame(rafId);
+  stop();
   window.removeEventListener("resize", onResize);
+
+  document.removeEventListener("visibilitychange", onVisibilityChange);
+
+  if (io) {
+    io.disconnect();
+    io = null;
+  }
 });
 </script>
 <template>
@@ -109,6 +161,7 @@ onUnmounted(() => {
     </div>
     <div class="collaborations__logos">
       <div
+        ref="marqueeRef"
         class="collaborations__marquee"
         @pointerdown="onPointerDown"
         @pointermove="onPointerMove"
