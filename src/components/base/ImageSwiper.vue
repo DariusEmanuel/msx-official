@@ -20,16 +20,24 @@ const onSlideChange = (e: any) => {};
     :space-between="spaceBetween"
     centered-slides="true"
     :pagination="{ hideOnClick: true }"
-    :breakpoints="{ 768: { slidesPerView: 3 } }"
+    :breakpoints="{
+      480: { slidesPerView: 1.2 },
+      640: { slidesPerView: 2 },
+      768: { slidesPerView: 3 },
+      1024: { slidesPerView: 4 },
+    }"
+    :simulate-touch="true"
+    :allow-touch-move="true"
+    grab-cursor="true"
     autoplay-delay="2500"
     rewind="true"
-    autoplay-disable-on-interaction="true"
+    autoplay-disable-on-interaction="false"
     touch-start-prevent-default="false"
     @swiperprogress="onProgress"
     @swiperslidechange="onSlideChange"
   >
     <swiper-slide v-for="({ url, alt }, index) in images" :key="index">
-      <img :src="url" :alt class="carousel__image" />
+      <img :src="url" :alt="alt" class="carousel__image" draggable="false" />
     </swiper-slide>
   </swiper-container>
 </template>
@@ -40,6 +48,12 @@ swiper-container {
   height: 100%;
   /* Let vertical scroll win on mobile when the gesture starts on the carousel */
   touch-action: pan-y;
+  cursor: grab;
+  user-select: none;
+}
+
+swiper-container:active {
+  cursor: grabbing;
 }
 
 swiper-container::part(bullet-active) {
@@ -65,5 +79,13 @@ swiper-slide {
   width: 100%;
   object-fit: contain;
   max-height: 280px;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+@media (min-width: 1024px) {
+  .carousel__image {
+    max-height: 360px;
+  }
 }
 </style>

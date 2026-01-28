@@ -27,9 +27,8 @@ import FooterSection from "@/components/sections/FooterSection.vue";
   <footer-section />
 </template>
 
-<style>
+<style scoped>
 main {
-  /* this is temporar */
-  /* margin-bottom: 200px; */
+  margin-bottom: 120px;
 }
 </style>

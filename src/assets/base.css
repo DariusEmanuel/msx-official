@@ -85,6 +85,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Desktop layout: keep content readable (but allow hero/full-bleed sections). */
+main {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+  main {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
 /* Prevent accidental horizontal overflow (common cause of "weird" mobile scrolling) */
 html,
 body {
