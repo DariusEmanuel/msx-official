@@ -103,6 +103,11 @@ export const useImagesStore = defineStore("images", () => {
     },
 
     {
+      url: new URL(`/src/assets/collabs/cafe-de-anatolia.jpg`, import.meta.url).href,
+      alt: "Cafe de Anatolia Matei Sax",
+      text: "Cafe de Anatolia",
+    },
+    {
       url: new URL(`/src/assets/collabs/anda-adam.jpeg`, import.meta.url).href,
       alt: "Anda Adam Matei Sax",
       text: "Anda Adam",
