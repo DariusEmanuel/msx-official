@@ -117,11 +117,11 @@ export const useImagesStore = defineStore("images", () => {
       alt: "Nazalio Fortes Matei Sax",
       text: "Nazalio Fortes",
     },
-    {
-      url: new URL(`/src/assets/collabs/batique.jpeg`, import.meta.url).href,
-      alt: "Batique Matei Sax",
-      text: "Batique",
-    },
+    // {
+    //   url: new URL(`/src/assets/collabs/batique.jpeg`, import.meta.url).href,
+    //   alt: "Batique Matei Sax",
+    //   text: "Batique",
+    // },
     {
       url: new URL(`/src/assets/collabs/dos-santos.jpeg`, import.meta.url).href,
       alt: "Banto dos Santos Matei Sax",
