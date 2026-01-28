@@ -34,6 +34,9 @@ const imagesStore = useImagesStore();
 
   &__text-content {
     padding: 20px;
+    max-width: 700px;
+    text-align: center;
+    margin: 0 auto;
   }
 
   &__title {
