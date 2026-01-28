@@ -112,11 +112,11 @@ export const useImagesStore = defineStore("images", () => {
       alt: "Anda Adam Matei Sax",
       text: "Anda Adam",
     },
-    {
-      url: new URL(`/src/assets/collabs/nazalio.jpeg`, import.meta.url).href,
-      alt: "Nazalio Fortes Matei Sax",
-      text: "Nazalio Fortes",
-    },
+    // {
+    //   url: new URL(`/src/assets/collabs/nazalio.jpeg`, import.meta.url).href,
+    //   alt: "Nazalio Fortes Matei Sax",
+    //   text: "Nazalio Fortes",
+    // },
     // {
     //   url: new URL(`/src/assets/collabs/batique.jpeg`, import.meta.url).href,
     //   alt: "Batique Matei Sax",
