@@ -21,6 +21,12 @@ const router = createRouter({
       meta: { title: "About | Matei Sax" },
     },
     {
+      path: "/more-pictures",
+      name: "more-pictures",
+      component: () => import("../pages/MorePicturesPage.vue"),
+      meta: { title: "More pictures | Matei Sax" },
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "not-found",
       component: NotFoundPage,
