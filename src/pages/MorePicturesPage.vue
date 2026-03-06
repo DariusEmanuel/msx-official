@@ -1,5 +1,31 @@
 <script setup lang="ts">
 import { RouterLink } from "vue-router";
+import { MasonryWall } from "@yeger/vue-masonry-wall";
+import { computed } from "vue";
+
+type PictureItem = { url: string; alt: string };
+
+const items = computed<PictureItem[]>(() => {
+  const filenames = [
+    "12e7ab11-9349-48fc-9961-3c4a2958bccc.JPG",
+    "2148f114-fd73-4d21-87ca-c28a17bef4e2.JPG",
+    "6ba66f81-a082-4a65-8a88-b393c5267aed.JPG",
+    "766613d5-15bc-408d-af72-7c8930c4cfa2.JPG",
+    "8942845c-d140-4de5-b257-7c281ced6a8c.JPG",
+    "9ae67d47-c980-4a22-a4d8-ac4a68b5dd18.JPG",
+    "SXV_9283.jpg",
+    "SXV_9313.jpg",
+    "a02693cb-7c13-4f78-89d7-66821b9e10bd.JPG",
+    "b7240ef4-a2f5-41c0-9cf0-284e73f5260b.JPG",
+  ];
+
+  return filenames.map((filename) => ({
+    url: new URL(`/src/assets/liveShows/${filename}`, import.meta.url).href,
+    alt: "Matei Sax live show photo",
+  }));
+});
+
+const keyMapper = (item: PictureItem) => item.url;
 </script>
 
 <template>
@@ -9,22 +35,20 @@ import { RouterLink } from "vue-router";
       <h1 class="more-pictures-page__title">More pictures</h1>
     </header>
 
-    <section class="more-pictures-page__grid-block" aria-label="Gallery grid 1">
-      <div class="more-pictures-page__grid">
-        <div v-for="i in 12" :key="`g1-${i}`" class="more-pictures-page__cell" />
-      </div>
-    </section>
-
-    <section class="more-pictures-page__grid-block" aria-label="Gallery grid 2">
-      <div class="more-pictures-page__grid">
-        <div v-for="i in 12" :key="`g2-${i}`" class="more-pictures-page__cell" />
-      </div>
-    </section>
-
-    <section class="more-pictures-page__grid-block" aria-label="Gallery grid 3">
-      <div class="more-pictures-page__grid">
-        <div v-for="i in 12" :key="`g3-${i}`" class="more-pictures-page__cell" />
-      </div>
+    <section class="more-pictures-page__wall" aria-label="Live show gallery">
+      <MasonryWall
+        :items="items"
+        :ssr-columns="2"
+        :column-width="260"
+        :gap="12"
+        :key-mapper="keyMapper"
+      >
+        <template #default="{ item }">
+          <figure class="more-pictures-page__card">
+            <img class="more-pictures-page__img" :src="item.url" :alt="item.alt" loading="lazy" />
+          </figure>
+        </template>
+      </MasonryWall>
     </section>
   </main>
 </template>
@@ -68,27 +92,24 @@ import { RouterLink } from "vue-router";
   font-family: GalvjiBold, Galvji, system-ui, sans-serif;
 }
 
-.more-pictures-page__grid-block {
-  margin: 0 0 22px;
+.more-pictures-page__wall {
+  margin-top: 8px;
 }
 
-.more-pictures-page__grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
+.more-pictures-page__card {
+  width: 100%;
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-@media (min-width: 860px) {
-  .more-pictures-page__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px;
-  }
-}
-
-.more-pictures-page__cell {
-  aspect-ratio: 1 / 1;
-  border-radius: 14px;
-  border: 1px dashed rgba(255, 255, 255, 0.28);
-  background: rgba(255, 255, 255, 0.04);
+.more-pictures-page__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
 }
 </style>
