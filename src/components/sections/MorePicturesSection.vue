@@ -3,8 +3,14 @@ import { RouterLink } from "vue-router";
 import HeadlineForSection from "@/components/base/HeadlineForSection.vue";
 import { MasonryWall } from "@yeger/vue-masonry-wall";
 import { computed } from "vue";
+import { useDevice } from "@/composables/useDevice";
 
-type PictureItem = { url: string; alt: string };
+type PictureItem = { url: string; alt: string; ratio: string };
+
+const { isMobile } = useDevice();
+const columnWidth = computed(() => (isMobile.value ? 130 : 160));
+const minColumns = computed(() => (isMobile.value ? 2 : 0));
+const maxColumns = computed(() => (isMobile.value ? 2 : 0));
 
 const previewItems = computed<PictureItem[]>(() => {
   const filenames = [
@@ -20,9 +26,11 @@ const previewItems = computed<PictureItem[]>(() => {
     "b7240ef4-a2f5-41c0-9cf0-284e73f5260b.JPG",
   ];
 
-  return filenames.map((filename) => ({
+  const ratios = ["4 / 5", "1 / 1", "3 / 4", "16 / 9", "2 / 3"];
+  return filenames.map((filename, index) => ({
     url: new URL(`/src/assets/liveShows/${filename}`, import.meta.url).href,
     alt: "Matei Sax live show photo",
+    ratio: ratios[index % ratios.length],
   }));
 });
 
@@ -40,22 +48,23 @@ const keyMapper = (item: PictureItem) => item.url;
         class="more-pictures__wall"
         :items="previewItems"
         :ssr-columns="2"
-        :column-width="160"
+        :column-width="columnWidth"
         :gap="10"
         :key-mapper="keyMapper"
+        :min-columns="minColumns || undefined"
+        :max-columns="maxColumns || undefined"
       >
         <template #default="{ item }">
-          <div class="more-pictures__tile">
+          <div class="more-pictures__tile" :style="{ aspectRatio: item.ratio }">
             <img class="more-pictures__img" :src="item.url" :alt="item.alt" loading="lazy" />
           </div>
         </template>
       </MasonryWall>
       <div class="more-pictures__fade" aria-hidden="true" />
+      <RouterLink class="more-pictures__cta" to="/more-pictures">
+        See full gallery
+      </RouterLink>
     </div>
-
-    <RouterLink class="more-pictures__cta" to="/more-pictures">
-      View galleries
-    </RouterLink>
   </section>
 </template>
 
@@ -91,8 +100,7 @@ const keyMapper = (item: PictureItem) => item.url;
 .more-pictures__img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 5;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -104,25 +112,31 @@ const keyMapper = (item: PictureItem) => item.url;
   height: 140px;
   background: linear-gradient(to bottom, rgba(24, 24, 24, 0), rgba(24, 24, 24, 0.92));
   pointer-events: none;
+  z-index: 1;
 }
 
 .more-pictures__cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 8px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
   padding: 12px 16px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.45);
   color: rgba(255, 255, 255, 0.92);
   text-decoration: none;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(24, 24, 24, 0.55);
+  backdrop-filter: blur(10px);
   transition: transform 120ms ease, background-color 120ms ease, border-color 120ms ease;
 }
 
 .more-pictures__cta:hover {
-  transform: translateY(-1px);
-  background: rgba(255, 255, 255, 0.1);
+  transform: translate(-50%, calc(-50% - 1px));
+  background: rgba(24, 24, 24, 0.7);
   border-color: rgba(255, 255, 255, 0.6);
 }
 </style>
