@@ -1,15 +1,24 @@
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
+import { useRouter } from "vue-router";
 import { MasonryWall } from "@yeger/vue-masonry-wall";
 import { computed } from "vue";
 import { useDevice } from "@/composables/useDevice";
 
 type PictureItem = { url: string; alt: string; ratio: string };
 
+const router = useRouter();
+
 const { isMobile } = useDevice();
 const columnWidth = computed(() => (isMobile.value ? 150 : 260));
 const minColumns = computed(() => (isMobile.value ? 2 : 0));
 const maxColumns = computed(() => (isMobile.value ? 2 : 0));
+
+function goBack() {
+  // Prefer restoring the previous scroll position (main page) when possible.
+  const state = window.history.state as { back?: unknown } | null;
+  if (state?.back) router.back();
+  else router.push({ path: "/" });
+}
 
 const items = computed<PictureItem[]>(() => {
   const filenames = [
@@ -41,7 +50,9 @@ const keyMapper = (item: PictureItem) => item.url;
 <template>
   <main class="more-pictures-page">
     <header class="more-pictures-page__header">
-      <RouterLink class="more-pictures-page__back" to="/">← Back</RouterLink>
+      <button class="more-pictures-page__back" type="button" @click="goBack">
+        ← Back
+      </button>
       <h1 class="more-pictures-page__title">More pictures</h1>
     </header>
 
@@ -82,7 +93,8 @@ const keyMapper = (item: PictureItem) => item.url;
 .more-pictures-page__back {
   flex: 0 0 auto;
   color: rgba(255, 255, 255, 0.92);
-  text-decoration: none;
+  appearance: none;
+  cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.35);
   background: rgba(255, 255, 255, 0.06);
   padding: 10px 12px;
