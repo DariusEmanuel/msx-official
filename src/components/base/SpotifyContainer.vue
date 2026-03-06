@@ -56,7 +56,7 @@ onBeforeUnmount(clearLoadTimer);
 </script>
 
 <template>
-  <div class="spotify-container" :style="{ width: props.width }">
+  <div class="spotify-container">
     <iframe
       v-if="!failed"
       class="spotify-container__iframe"
@@ -71,7 +71,7 @@ onBeforeUnmount(clearLoadTimer);
       @load="onIframeLoad"
       @error="onIframeError"
     ></iframe>
-    <div v-else class="spotify-container__fallback" role="note">
+    <div v-else class="spotify-container__fallback" role="note" :style="{ width: props.width }">
       <div class="spotify-container__fallback-title">Spotify player couldn’t load.</div>
       <a
         class="spotify-container__fallback-link"

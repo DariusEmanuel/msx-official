@@ -59,7 +59,7 @@ onBeforeUnmount(clearLoadTimer);
 </script>
 
 <template>
-  <div class="youtube-container" :style="{ width: props.width }">
+  <div class="youtube-container">
     <iframe
       v-if="!failed"
       class="youtube-container__iframe"
