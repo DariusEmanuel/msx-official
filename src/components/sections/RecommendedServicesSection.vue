@@ -32,7 +32,7 @@ const categories = [
 
 <template>
   <section class="recommended-services">
-    <HeadlineForSection title="Recommended services" font-size="54px" line-height="48px">
+    <HeadlineForSection title="Recommended services" font-size="40px" line-height="48px">
       Makeup, photography, dancing classes, and more services you can book for your event.
     </HeadlineForSection>
 
