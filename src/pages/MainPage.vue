@@ -10,6 +10,7 @@ import LiveShowsSection from "@/components/sections/LiveShowsSection.vue";
 import BookingFormSection from "@/components/sections/BookingFormSection.vue";
 import CollaborationsSection from "@/components/sections/CollaborationsSection.vue";
 import MorePicturesSection from "@/components/sections/MorePicturesSection.vue";
+import RecommendedServicesSection from "@/components/sections/RecommendedServicesSection.vue";
 import PlatformsSection from "@/components/sections/PlatformsSection.vue";
 import FooterSection from "@/components/sections/FooterSection.vue";
 </script>
@@ -23,6 +24,7 @@ import FooterSection from "@/components/sections/FooterSection.vue";
     <live-shows-section />
     <collaborations-section />
     <more-pictures-section />
+    <recommended-services-section />
     <booking-form-section />
     <platforms-section />
   </main>

@@ -1,10 +1,22 @@
 <script setup lang="ts">
 import type { Image } from "@/stores/imagesStore";
+
+type SwiperBreakpoints = Record<number, { slidesPerView: number }>;
+
 interface ImageSwiperProps {
   images: Image[];
+  breakpoints?: SwiperBreakpoints;
+  fillContainer?: boolean;
 }
 
-const props = defineProps<Required<ImageSwiperProps>>();
+const defaultBreakpoints = {
+  480: { slidesPerView: 1.2 },
+  640: { slidesPerView: 2 },
+  768: { slidesPerView: 3 },
+  1024: { slidesPerView: 4 },
+} satisfies SwiperBreakpoints;
+
+const props = defineProps<ImageSwiperProps>();
 
 const spaceBetween = 10;
 const onProgress = (e: any) => {
@@ -16,16 +28,12 @@ const onSlideChange = (e: any) => {};
 
 <template>
   <swiper-container
+    :class="{ 'carousel--fill': props.fillContainer }"
     :slides-per-view="1"
     :space-between="spaceBetween"
     centered-slides="true"
     :pagination="{ hideOnClick: true }"
-    :breakpoints="{
-      480: { slidesPerView: 1.2 },
-      640: { slidesPerView: 2 },
-      768: { slidesPerView: 3 },
-      1024: { slidesPerView: 4 },
-    }"
+    :breakpoints="props.breakpoints ?? defaultBreakpoints"
     :simulate-touch="true"
     :allow-touch-move="true"
     grab-cursor="true"
@@ -66,7 +74,6 @@ swiper-container::part(bullet) {
 
 swiper-slide {
   width: 100%;
-  // height: 220px;
   text-align: center;
   font-size: 20px;
   display: flex;
@@ -83,9 +90,25 @@ swiper-slide {
   user-select: none;
 }
 
+.carousel--fill {
+  swiper-slide {
+    height: 100%;
+  }
+
+  .carousel__image {
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+  }
+}
+
 @media (min-width: 1024px) {
   .carousel__image {
     max-height: 360px;
+  }
+
+  .carousel--fill .carousel__image {
+    max-height: none;
   }
 }
 </style>

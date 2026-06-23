@@ -29,6 +29,12 @@ const router = createRouter({
       meta: { title: "More pictures | Matei Sax" },
     },
     {
+      path: "/recommended-services",
+      name: "recommended-services",
+      component: () => import("../pages/RecommendedServicesPage.vue"),
+      meta: { title: "Recommended services | Matei Sax" },
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "not-found",
       component: NotFoundPage,

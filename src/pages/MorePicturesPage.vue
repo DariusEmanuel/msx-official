@@ -21,7 +21,23 @@ function goBack() {
 }
 
 const items = computed<PictureItem[]>(() => {
-  const filenames = [
+  const moreImages = [
+    { filename: "saxophone-wedding-dancefloor-1.png", ratio: "3 / 2" },
+    { filename: "saxophone-wedding-dancefloor-2.png", ratio: "3 / 2" },
+    { filename: "saxophone-wedding-venue.png", ratio: "3 / 2" },
+    { filename: "saxophone-stage-red-light.png", ratio: "2 / 3" },
+    { filename: "saxophone-outdoor-couch.png", ratio: "2 / 3" },
+    { filename: "saxophone-led-stage.png", ratio: "2 / 3" },
+    { filename: "saxophone-festival-stage.png", ratio: "3 / 2" },
+    { filename: "saxophone-couch-overhead.png", ratio: "3 / 2" },
+    { filename: "saxophone-wedding-closeup.png", ratio: "3 / 2" },
+    { filename: "saxophone-wedding-guests.png", ratio: "3 / 2" },
+    { filename: "saxophone-outdoor-stage.png", ratio: "2 / 3" },
+    { filename: "saxophone-outdoor-lounge.png", ratio: "3 / 2" },
+    { filename: "saxophone-dj-stage.png", ratio: "2 / 3" },
+  ];
+
+  const liveShowFilenames = [
     "12e7ab11-9349-48fc-9961-3c4a2958bccc.JPG",
     "2148f114-fd73-4d21-87ca-c28a17bef4e2.JPG",
     "5b2e182c-4e30-450a-bc95-416752d533fc.JPG",
@@ -37,11 +53,18 @@ const items = computed<PictureItem[]>(() => {
   ];
 
   const ratios = ["4 / 5", "1 / 1", "3 / 4", "16 / 9", "2 / 3"];
-  return filenames.map((filename, index) => ({
-    url: new URL(`/src/assets/liveShows/${filename}`, import.meta.url).href,
-    alt: "Matei Sax live show photo",
-    ratio: ratios[index % ratios.length],
-  }));
+  return [
+    ...moreImages.map(({ filename, ratio }) => ({
+      url: new URL(`/src/assets/more-images/${filename}`, import.meta.url).href,
+      alt: "Matei Sax performance photo",
+      ratio,
+    })),
+    ...liveShowFilenames.map((filename, index) => ({
+      url: new URL(`/src/assets/liveShows/${filename}`, import.meta.url).href,
+      alt: "Matei Sax live show photo",
+      ratio: ratios[index % ratios.length],
+    })),
+  ];
 });
 
 const keyMapper = (item: PictureItem) => item.url;
