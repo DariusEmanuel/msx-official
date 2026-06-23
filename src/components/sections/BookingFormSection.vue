@@ -79,6 +79,7 @@ async function onSubmit(form$: any) {
           name="phone"
           placeholder="Phone number"
           field-name="Phone number"
+          default="+40"
           :rules="['required']"
           :allow-incomplete="true"
           :unmask="true"
