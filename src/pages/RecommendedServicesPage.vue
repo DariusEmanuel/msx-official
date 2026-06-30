@@ -26,6 +26,7 @@ function goBack() {
         ← Back
       </button>
       <div>
+        <p class="recommended-services-page__eyebrow">Bookable partners</p>
         <h1 class="recommended-services-page__title">Recommended services</h1>
       </div>
     </header>
@@ -42,14 +43,20 @@ function goBack() {
         v-for="provider in recommendedServicesStore.providers"
         :key="provider.id"
         class="provider"
+        :class="{ 'provider--no-gallery': provider.galleryImages.length === 0 }"
         :aria-labelledby="`${provider.id}-title`"
       >
         <div class="provider__profile">
           <div class="provider__spotlight" aria-label="Provider placeholder images">
             <img
-              v-for="image in provider.spotlightImages"
+              v-for="(image, imageIndex) in provider.spotlightImages"
               :key="image.alt"
               class="provider__spotlight-image"
+              :class="{
+                'provider__spotlight-image--valart-logo':
+                  provider.id === 'valentina-valart-dancing-school' &&
+                  imageIndex === provider.spotlightImages.length - 1,
+              }"
               :src="image.url"
               :alt="image.alt"
               loading="lazy"
@@ -57,6 +64,7 @@ function goBack() {
           </div>
 
           <div class="provider__text">
+            <p class="provider__name">{{ provider.name }}</p>
             <h2 :id="`${provider.id}-title`" class="provider__brand">
               {{ provider.brand }}
             </h2>
@@ -89,7 +97,11 @@ function goBack() {
           </div>
         </div>
 
-        <div class="provider__carousel" :aria-label="`${provider.brand} placeholder gallery`">
+        <div
+          v-if="provider.galleryImages.length > 0"
+          class="provider__carousel"
+          :aria-label="`${provider.brand} placeholder gallery`"
+        >
           <ImageSwiper
             :images="provider.galleryImages"
             :breakpoints="recommendedServicesBreakpoints"
@@ -133,6 +145,13 @@ function goBack() {
   border-color: rgba(255, 255, 255, 0.55);
 }
 
+.recommended-services-page__eyebrow {
+  margin: 0 0 4px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
 
 .recommended-services-page__title {
   margin: 0;
@@ -172,6 +191,10 @@ function goBack() {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
 }
 
+.provider--no-gallery {
+  grid-template-columns: 1fr;
+}
+
 .provider__profile {
   display: grid;
   grid-template-columns: 150px minmax(0, 1fr);
@@ -209,6 +232,19 @@ function goBack() {
   border-radius: 18px;
   object-fit: contain;
   background: transparent;
+}
+
+.provider__spotlight-image.provider__spotlight-image--valart-logo {
+  right: -15px;
+  width: auto;
+  padding: 0;
+  background: rgba(215, 179, 155, 0.7);
+}
+
+.provider__name {
+  margin: 0 0 4px;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 14px;
 }
 
 .provider__brand {

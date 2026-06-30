@@ -67,18 +67,6 @@ export const useRecommendedServicesStore = defineStore("recommendedServices", ()
           url: asset("recommended-services/cezara-carousel-3.png"),
           alt: "Cezara bridal makeup seated portrait",
         },
-        {
-          url: asset("recommended-services/cezara-carousel-4.png"),
-          alt: "Cezara blonde bridal makeup portrait",
-        },
-        {
-          url: asset("recommended-services/cezara-carousel-5.png"),
-          alt: "Cezara blonde bridal makeup with shimmer eyeshadow",
-        },
-        {
-          url: asset("recommended-services/cezara-carousel-6.png"),
-          alt: "Cezara soft glam makeup editorial portrait",
-        },
       ],
       contacts: [
         { label: "Instagram", value: "@cezaraadam.makeupartist", href: "https://www.instagram.com/cezaraadam.makeupartist/" },
@@ -123,43 +111,29 @@ export const useRecommendedServicesStore = defineStore("recommendedServices", ()
     //     { label: "Email", value: "darius@example.com", href: "mailto:darius@example.com" },
     //   ],
     // },
-    // {
-    //   id: "valentina-valart-dancing-school",
-    //   name: "Valentina",
-    //   brand: "ValArt Dancing School",
-    //   services: ["Dance classes", "Wedding dance", "Private choreography"],
-    //   description:
-    //     "Placeholder description for a dance school offering expressive classes, custom choreography, and memorable wedding moments.",
-    //   spotlightImages: [
-    //     {
-    //       url: asset("collabs/electric-castle.jpg"),
-    //       alt: "Placeholder portrait for Valentina from ValArt Dancing School",
-    //     },
-    //     {
-    //       url: asset("logo.svg"),
-    //       alt: "Placeholder logo for ValArt Dancing School",
-    //     },
-    //   ],
-    //   galleryImages: [
-    //     {
-    //       url: asset("collabs/untold.jpg"),
-    //       alt: "Placeholder dance school image",
-    //     },
-    //     {
-    //       url: asset("collabs/euphoria-music-hall.jpeg"),
-    //       alt: "Placeholder choreography image",
-    //     },
-    //     {
-    //       url: asset("collabs/hillhouse.jpeg"),
-    //       alt: "Placeholder performance dance image",
-    //     },
-    //   ],
-    //   contacts: [
-    //     { label: "Instagram", value: "@valart.dance.placeholder", href: "https://instagram.com/" },
-    //     { label: "Phone", value: "+40 700 000 003", href: "tel:+40700000003" },
-    //     { label: "Email", value: "valart@example.com", href: "mailto:valart@example.com" },
-    //   ],
-    // },
+    {
+      id: "valentina-valart-dancing-school",
+      name: "Valentina",
+      brand: "ValArt | Art of dance",
+      services: ["Wedding dances", "Bachata", "Private classes"],
+      description:
+        "Dance school focused on wedding dances, bachata lessons, and private classes for couples and event guests.",
+      spotlightImages: [
+        {
+          url: asset("recommended-services/valart-picture.png"),
+          alt: "Valentina from ValArt Dance School",
+        },
+        {
+          url: asset("recommended-services/valart-logo.png"),
+          alt: "ValArt Dance School logo",
+        },
+      ],
+      galleryImages: [],
+      contacts: [
+        { label: "Instagram", value: "@valart.dance", href: "https://www.instagram.com/valart.dance/" },
+        { label: "Instagram", value: "@popvalentina", href: "https://www.instagram.com/popvalentina/" },
+      ],
+    },
   ]);
 
   return { providers };
