@@ -67,6 +67,18 @@ export const useRecommendedServicesStore = defineStore("recommendedServices", ()
           url: asset("recommended-services/cezara-carousel-3.png"),
           alt: "Cezara bridal makeup seated portrait",
         },
+        {
+          url: asset("recommended-services/cezara-carousel-4.png"),
+          alt: "Cezara bridal makeup look",
+        },
+        {
+          url: asset("recommended-services/cezara-carousel-5.png"),
+          alt: "Cezara event makeup portrait",
+        },
+        {
+          url: asset("recommended-services/cezara-carousel-6.png"),
+          alt: "Cezara makeup portfolio portrait",
+        },
       ],
       contacts: [
         { label: "Instagram", value: "@cezaraadam.makeupartist", href: "https://www.instagram.com/cezaraadam.makeupartist/" },
@@ -74,43 +86,6 @@ export const useRecommendedServicesStore = defineStore("recommendedServices", ()
         { label: "Email", value: "Cezaraa.Adam@gmail.com", href: "mailto:Cezaraa.Adam@gmail.com" },
       ],
     },
-    // {
-    //   id: "darius-shutterbug-photography",
-    //   name: "Darius",
-    //   brand: "Darius Shutterbug Photography",
-    //   services: ["Event photography", "Portrait sessions", "Brand shoots"],
-    //   description:
-    //     "Placeholder description for a photographer capturing live moments, artist portraits, and polished visual stories for brands.",
-    //   spotlightImages: [
-    //     {
-    //       url: asset("liveShows/SXV_9283.jpg"),
-    //       alt: "Placeholder portrait for Darius Shutterbug Photography",
-    //     },
-    //     {
-    //       url: asset("logo.svg"),
-    //       alt: "Placeholder logo for Darius Shutterbug Photography",
-    //     },
-    //   ],
-    //   galleryImages: [
-    //     {
-    //       url: asset("liveShows/12e7ab11-9349-48fc-9961-3c4a2958bccc.JPG"),
-    //       alt: "Placeholder photography portfolio image",
-    //     },
-    //     {
-    //       url: asset("liveShows/6ba66f81-a082-4a65-8a88-b393c5267aed.JPG"),
-    //       alt: "Placeholder event photography image",
-    //     },
-    //     {
-    //       url: asset("liveShows/SXV_9313.jpg"),
-    //       alt: "Placeholder portrait photography image",
-    //     },
-    //   ],
-    //   contacts: [
-    //     { label: "Instagram", value: "@darius.shutterbug.placeholder", href: "https://instagram.com/" },
-    //     { label: "Phone", value: "+40 700 000 002", href: "tel:+40700000002" },
-    //     { label: "Email", value: "darius@example.com", href: "mailto:darius@example.com" },
-    //   ],
-    // },
     {
       id: "valentina-valart-dancing-school",
       name: "Valentina",
@@ -132,6 +107,114 @@ export const useRecommendedServicesStore = defineStore("recommendedServices", ()
       contacts: [
         { label: "Instagram", value: "@valart.dance", href: "https://www.instagram.com/valart.dance/" },
         { label: "Instagram", value: "@popvalentina", href: "https://www.instagram.com/popvalentina/" },
+        { label: "Phone", value: "+40 742 161 373", href: "tel:+40742161373" },
+      ],
+    },
+    {
+      id: "darius-shutterbug-photography",
+      brand: "Darius.shutterbug",
+      services: ["Artist photographer", "Private events", "Concerts", "Brands"],
+      description:
+        "Photography for artists, private events, concerts, and brands, with a focus on expressive moments ✨",
+      spotlightImages: [
+        {
+          url: asset("recommended-services/darius_shutterbug-image.jpg"),
+          alt: "Darius Shutterbug Photography portrait",
+        },
+        {
+          url: asset("recommended-services/darius.shutterbug-logo-transparent.png"),
+          alt: "Darius Shutterbug Photography logo",
+        },
+      ],
+      galleryImages: [
+        {
+          url: asset("recommended-services/darius-carousel-01.png"),
+          alt: "Darius Shutterbug carousel image 1",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-02.png"),
+          alt: "Darius Shutterbug carousel image 2",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-03.png"),
+          alt: "Darius Shutterbug carousel image 3",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-04.png"),
+          alt: "Darius Shutterbug carousel image 4",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-05.png"),
+          alt: "Darius Shutterbug carousel image 5",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-06.png"),
+          alt: "Darius Shutterbug carousel image 6",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-07.png"),
+          alt: "Darius Shutterbug carousel image 7",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-08.png"),
+          alt: "Darius Shutterbug carousel image 8",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-09.png"),
+          alt: "Darius Shutterbug carousel image 9",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-10.png"),
+          alt: "Darius Shutterbug carousel image 10",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-11.png"),
+          alt: "Darius Shutterbug carousel image 11",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-12.png"),
+          alt: "Darius Shutterbug carousel image 12",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-13.png"),
+          alt: "Darius Shutterbug carousel image 13",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-14.png"),
+          alt: "Darius Shutterbug carousel image 14",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-15.png"),
+          alt: "Darius Shutterbug carousel image 15",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-16.png"),
+          alt: "Darius Shutterbug carousel image 16",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-17.png"),
+          alt: "Darius Shutterbug carousel image 17",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-18.png"),
+          alt: "Darius Shutterbug carousel image 18",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-19.png"),
+          alt: "Darius Shutterbug carousel image 19",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-20.png"),
+          alt: "Darius Shutterbug carousel image 20",
+        },
+        {
+          url: asset("recommended-services/darius-carousel-21.png"),
+          alt: "Darius Shutterbug carousel image 21",
+        },
+      ],
+      contacts: [
+        { label: "Instagram", value: "@darius.shutterbug", href: "https://www.instagram.com/darius.shutterbug/" },
+        { label: "Phone", value: "+40 758 617 869", href: "tel:+40758617869" },
       ],
     },
   ]);

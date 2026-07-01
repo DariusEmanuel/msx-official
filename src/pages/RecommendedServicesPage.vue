@@ -26,17 +26,9 @@ function goBack() {
         ← Back
       </button>
       <div>
-        <p class="recommended-services-page__eyebrow">Bookable partners</p>
         <h1 class="recommended-services-page__title">Recommended services</h1>
       </div>
     </header>
-
-    <section class="recommended-services-page__intro">
-      <p>
-        Placeholder recommendations for trusted providers that can complete an event booking
-        experience alongside Matei Sax.
-      </p>
-    </section>
 
     <section class="recommended-services-page__list" aria-label="Recommended service providers">
       <article
