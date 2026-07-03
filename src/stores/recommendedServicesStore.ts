@@ -112,6 +112,7 @@ export const useRecommendedServicesStore = defineStore("recommendedServices", ()
     },
     {
       id: "darius-shutterbug-photography",
+      name: "Darius",
       brand: "Darius.shutterbug",
       services: ["Artist photographer", "Private events", "Concerts", "Brands"],
       description:
