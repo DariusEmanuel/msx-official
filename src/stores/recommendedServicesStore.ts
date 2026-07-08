@@ -43,7 +43,7 @@ export const useRecommendedServicesStore = defineStore("recommendedServices", ()
       brand: "Cezara Adam Make-up Artist",
       services: ["Bridal makeup", "Event makeup", "Editorial glam"],
       description:
-        "Placeholder description for a makeup artist focused on elegant looks for weddings, private events, and photoshoots.",
+        "Luxury Bridal & Editorial Makeup Artist, specializing in bridal, occasion, and photoshoot makeup. Enhancing natural beauty through timeless, flawless artistry.",
       spotlightImages: [
         {
           url: asset("recommended-services/cezara-makeup-artist-picture.png"),
